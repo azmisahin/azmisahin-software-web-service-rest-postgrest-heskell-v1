@@ -1,0 +1,3 @@
+[submodule "database"]
+	path = database
+	url = https://github.com/azmisahin/azmisahin-software-data-service-application-postgresql-c-v1.git
