@@ -51,9 +51,9 @@ services:
     ports:
       - "${DATABASE_SERVICE_HOST_PORT}:${DATABASE_SERVICE_APP_PORT}"
     volumes:
-      # host data / production data
+      # The location of the folder where Dockers persistent data is stored
       - "../.postgresql/data:/var/lib/postgresql/data"
-      # default database
+      # Startup scripts used to boot the DB [ default ]
       - "../.module/postgresql/data/service:/docker-entrypoint-initdb.d"
     environment:
       # product
