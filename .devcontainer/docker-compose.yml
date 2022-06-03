@@ -2,7 +2,7 @@
 #  * @file docker-compose.yml
 #  * @author Azmi ŞAHİN (azmisahin@outlook.com)
 #  * @brief running multi-container Docker applications.
-#  * @version 0.1.3
+#  * @version 0.1.4
 #  * @date 2022-01-01
 #  *
 #  * @copyright Copyright (c) 2022
@@ -143,3 +143,15 @@ services:
       - "data-service:data-service"
     depends_on:
       - "data-service"
+
+  # web service rest ui
+  web-service-rest-ui:
+    container_name: "${WEB_SERVICE_REST_UI_NAME}"
+    image: swaggerapi/swagger-ui
+    ports:
+      - "${WEB_SERVICE_REST_UI_HOST_PORT}:${WEB_SERVICE_REST_UI_APP_PORT}"
+    expose:
+      - "8080"
+    environment:
+      API_URL: http://localhost:${WEB_SERVICE_REST_HOST_PORT}/
+
