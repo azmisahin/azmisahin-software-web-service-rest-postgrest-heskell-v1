@@ -1,7 +1,7 @@
 # Introduction 
 Restfull API with OpenApi support, using authentication mechanisms such as JWT, fast integration with devops environments, using powerful postgresql database features.
 
-🔖: releasing / 0.1.4
+🔖: releasing / 0.1.6
 
 # Getting Started
 TO DO: Things to do when getting started on this project.
