@@ -1,5 +1,5 @@
 # Introduction 
-General repository standardization template for docker project types. Compatible for agile processes.
+Restfull API with OpenApi support, using authentication mechanisms such as JWT, fast integration with devops environments, using powerful postgresql database features.
 
 🔖: releasing / 0.1.0
 
