@@ -143,3 +143,15 @@ services:
       - "data-service:data-service"
     depends_on:
       - "data-service"
+
+  # web service rest ui
+  web-service-rest-ui:
+    container_name: "${WEB_SERVICE_REST_UI_NAME}"
+    image: swaggerapi/swagger-ui
+    ports:
+      - "${WEB_SERVICE_REST_UI_HOST_PORT}:${WEB_SERVICE_REST_UI_APP_PORT}"
+    expose:
+      - "8080"
+    environment:
+      API_URL: http://localhost:${WEB_SERVICE_REST_HOST_PORT}/
+
