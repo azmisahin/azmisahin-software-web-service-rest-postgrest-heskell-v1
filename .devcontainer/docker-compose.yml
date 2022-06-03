@@ -104,7 +104,7 @@ services:
     image: dpage/pgadmin4
     ports:
       - "${DATABASE_SERVICE_UI_HOST_PORT}:${DATABASE_SERVICE_UI_APP_PORT}"
-    # volumes:
+      # volumes:
       # This ensures that the connection information is preloaded into the pgAdmin instance in the container.
       # this volume not loaded in submodule?
       # - "../.module/postgresql/data/service-ui/servers.json:/pgadmin4/servers.json"
@@ -130,10 +130,15 @@ services:
       # product
       ENV: "${ENV}"
 
-      # data service ui
+      # rest service database connection
       PGRST_DB_URI: ${WEB_SERVICE_REST_DB_URI}
       PGRST_DB_SCHEMA: ${WEB_SERVICE_REST_API_SHEMA}
       PGRST_DB_ANON_ROLE: ${DATABASE_SERVICE_ANONYMOUS_ROLE}
+      # rest service role and authorization
+      PGRST_ROLE_CLAIM_KEY: "${AUTHORIZATION_ROLE_CLAIM_KEY}"
+      PGRST_JWT_AUD: "3${AUTHORIZATION_AUDIENCE_VALID}"
+      PGRST_JWT_SECRET: "${AUTHORIZATION_SECRET_KEY}"
+
     links:
       - "data-service:data-service"
     depends_on:
