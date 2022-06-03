@@ -8,6 +8,10 @@ SET
 -- include relative
 \ir permission.pgsql;
 
+\ir types/init.pgsql;
+
+\ir functions/init.pgsql;
+
 \ir tables/init.pgsql;
 
 \ir views/init.pgsql;
