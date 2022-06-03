@@ -119,3 +119,22 @@ services:
       - "data-service:data-service"
     depends_on:
       - "data-service"
+
+  # web service rest full
+  web-service-rest:
+    container_name: "${WEB_SERVICE_REST_NAME}"
+    image: postgrest/postgrest:${WEB_SERVICE_REST_VERSION}
+    ports:
+      - "${WEB_SERVICE_REST_HOST_PORT}:${WEB_SERVICE_REST_APP_PORT}"
+    environment:
+      # product
+      ENV: "${ENV}"
+
+      # data service ui
+      PGRST_DB_URI: ${WEB_SERVICE_REST_DB_URI}
+      PGRST_DB_SCHEMA: ${WEB_SERVICE_REST_API_SHEMA}
+      PGRST_DB_ANON_ROLE: ${DATABASE_SERVICE_ANONYMOUS_ROLE}
+    links:
+      - "data-service:data-service"
+    depends_on:
+      - "data-service"
