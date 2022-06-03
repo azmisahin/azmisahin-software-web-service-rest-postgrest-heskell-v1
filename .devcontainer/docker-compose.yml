@@ -39,7 +39,7 @@ services:
       # application
 
     volumes:
-      - ..:/workspace:cached
+      - ..:/workspace
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
@@ -51,7 +51,7 @@ services:
     ports:
       - "${DATABASE_SERVICE_HOST_PORT}:${DATABASE_SERVICE_APP_PORT}"
     volumes:
-      - "../database/data/service:/docker-entrypoint-initdb.d"
+      - "../.module/postgresql/data/service:/docker-entrypoint-initdb.d"
     environment:
       # product
       ENV: "${ENV}"
@@ -86,7 +86,7 @@ services:
       - "${DATABASE_SERVICE_UI_HOST_PORT}:${DATABASE_SERVICE_UI_APP_PORT}"
     volumes:
       # This ensures that the connection information is preloaded into the pgAdmin instance in the container.
-      - "../database/data/service-ui/servers.json:/pgadmin4/servers.json"
+      - "../.module/postgresql/data/service-ui/servers.json:/pgadmin4/servers.json"
     environment:
       # product
       ENV: "${ENV}"
