@@ -51,6 +51,9 @@ services:
     ports:
       - "${DATABASE_SERVICE_HOST_PORT}:${DATABASE_SERVICE_APP_PORT}"
     volumes:
+      # host data / production data
+      - "../.postgresql/data:/var/lib/postgresql/data"
+      # default database
       - "../.module/postgresql/data/service:/docker-entrypoint-initdb.d"
     environment:
       # product
