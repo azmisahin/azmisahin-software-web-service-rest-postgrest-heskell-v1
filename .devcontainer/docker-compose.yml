@@ -84,9 +84,10 @@ services:
     image: dpage/pgadmin4
     ports:
       - "${DATABASE_SERVICE_UI_HOST_PORT}:${DATABASE_SERVICE_UI_APP_PORT}"
-    volumes:
+    # volumes:
       # This ensures that the connection information is preloaded into the pgAdmin instance in the container.
-      - "../.module/postgresql/data/service-ui/servers.json:/pgadmin4/servers.json"
+      # this volume not loaded in submodule?
+      # - "../.module/postgresql/data/service-ui/servers.json:/pgadmin4/servers.json"
     environment:
       # product
       ENV: "${ENV}"
