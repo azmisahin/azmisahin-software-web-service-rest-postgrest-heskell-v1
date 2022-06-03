@@ -53,8 +53,8 @@ services:
     volumes:
       # The location of the folder where Dockers persistent data is stored
       - "../.postgresql/data:/var/lib/postgresql/data"
-      # Startup scripts used to boot the DB [ default ]
-      - "../.module/postgresql/data/service:/docker-entrypoint-initdb.d"
+      # Startup scripts used to boot the DB [ apis ]
+      - "../data/service:/docker-entrypoint-initdb.d"
     environment:
       # product
       ENV: "${ENV}"
