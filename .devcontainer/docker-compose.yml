@@ -138,6 +138,8 @@ services:
       PGRST_ROLE_CLAIM_KEY: "${AUTHORIZATION_ROLE_CLAIM_KEY}"
       PGRST_JWT_AUD: "3${AUTHORIZATION_AUDIENCE_VALID}"
       PGRST_JWT_SECRET: "${AUTHORIZATION_SECRET_KEY}"
+      # api specification
+      PGRST_OPENAPI_SERVER_PROXY_URI: ${WEB_SERVICE_REST_OPENAPI_SERVER_PROXY_URI}
 
     links:
       - "data-service:data-service"
@@ -154,4 +156,3 @@ services:
       - "8080"
     environment:
       API_URL: http://localhost:${WEB_SERVICE_REST_HOST_PORT}/
-
