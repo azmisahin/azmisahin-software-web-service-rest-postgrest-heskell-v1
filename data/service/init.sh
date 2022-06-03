@@ -10,6 +10,14 @@
 #  * @copyright Copyright (c) 2022
 #  */
 
+echo base data service initialized
+echo ==================================================
+echo
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    \ir /service/init.pgsql;
+    \ir /service/init.migrations.pgsql;
+EOSQL
+echo
 # the script should stop when it encounters an error.
 set -e
 # Warning: scripts in /docker-entrypoint-initdb.d are only run

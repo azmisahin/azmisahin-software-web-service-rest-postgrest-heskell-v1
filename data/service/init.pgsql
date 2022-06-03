@@ -26,6 +26,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" schema public;
 -- all statements after a BEGIN command will be executed in a single transaction until an explicit COMMIT or ROLLBACK is given
 BEGIN;
 -- include relative
+\ir roles/init.pgsql;
 \ir schemas/init.pgsql;
 
 COMMIT;
