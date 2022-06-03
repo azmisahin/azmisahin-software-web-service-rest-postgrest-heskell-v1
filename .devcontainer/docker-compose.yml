@@ -2,7 +2,7 @@
 #  * @file docker-compose.yml
 #  * @author Azmi ŞAHİN (azmisahin@outlook.com)
 #  * @brief running multi-container Docker applications.
-#  * @version 0.1.1
+#  * @version 0.1.2
 #  * @date 2022-01-01
 #  *
 #  * @copyright Copyright (c) 2022
@@ -52,7 +52,7 @@ services:
       - "${DATABASE_SERVICE_HOST_PORT}:${DATABASE_SERVICE_APP_PORT}"
     volumes:
       # The location of the folder where Dockers persistent data is stored
-      - "../.postgresql/data:/var/lib/postgresql/data"
+      # - "../.postgresql/data:/var/lib/postgresql/data"
       # Startup scripts used to boot the DB [ apis ]
       - "../data/service:/docker-entrypoint-initdb.d"
     environment:
@@ -84,10 +84,10 @@ services:
       PGADMIN_DEFAULT_PASSWORD: "${AUTHORIZED_PASSWORD}"
 
       # data service sql
-      DATABASE_SERVICE_CATALOG_SHEMAS: "${ENV}"
-      DATABASE_SERVICE_AUTHENTICATION_ROLE: "${ENV}"
-      DATABASE_SERVICE_ANONYMOUS_ROLE: "${ENV}"
-      DATABASE_SERVICE_USER_ROLE: "${ENV}"
+      DATABASE_SERVICE_CATALOG_SHEMAS: "${DATABASE_SERVICE_CATALOG_SHEMAS}"
+      DATABASE_SERVICE_AUTHENTICATION_ROLE: "${DATABASE_SERVICE_AUTHENTICATION_ROLE}"
+      DATABASE_SERVICE_ANONYMOUS_ROLE: "${DATABASE_SERVICE_ANONYMOUS_ROLE}"
+      DATABASE_SERVICE_USER_ROLE: "${DATABASE_SERVICE_USER_ROLE}"
 
       # authorization
       AUTHORIZATION_AUDIENCE_VALID: "${AUTHORIZATION_AUDIENCE_VALID}"
