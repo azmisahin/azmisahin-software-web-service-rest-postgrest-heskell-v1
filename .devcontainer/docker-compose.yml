@@ -2,7 +2,7 @@
 #  * @file docker-compose.yml
 #  * @author Azmi ŞAHİN (azmisahin@outlook.com)
 #  * @brief running multi-container Docker applications.
-#  * @version 0.1.0
+#  * @version 0.1.1
 #  * @date 2022-01-01
 #  *
 #  * @copyright Copyright (c) 2022
@@ -51,11 +51,16 @@ services:
     ports:
       - "${DATABASE_SERVICE_HOST_PORT}:${DATABASE_SERVICE_APP_PORT}"
     volumes:
-      - "../.module/postgresql/data/service:/docker-entrypoint-initdb.d"
+      # The location of the folder where Dockers persistent data is stored
+      - "../.postgresql/data:/var/lib/postgresql/data"
+      # Startup scripts used to boot the DB [ apis ]
+      - "../data/service:/docker-entrypoint-initdb.d"
     environment:
-      # product
-      ENV: "${ENV}"
-      APP_NAME: "${APP_NAME}"
+      ENV: ${ENV}
+      APP_NAME: ${APP_NAME}
+      CONTAINER: ${CONTAINER}
+      DOMAIN_NAME: ${DOMAIN_NAME}
+      SECRET_KEY: ${SECRET_KEY}
 
       # postgres sql
       POSTGRES_USER: "${DATABASE_SERVICE_USER}"
@@ -78,15 +83,31 @@ services:
       PGADMIN_DEFAULT_EMAIL: "${AUTHORIZED_EMAIL}"
       PGADMIN_DEFAULT_PASSWORD: "${AUTHORIZED_PASSWORD}"
 
+      # data service sql
+      DATABASE_SERVICE_CATALOG_SHEMAS: "${ENV}"
+      DATABASE_SERVICE_AUTHENTICATION_ROLE: "${ENV}"
+      DATABASE_SERVICE_ANONYMOUS_ROLE: "${ENV}"
+      DATABASE_SERVICE_USER_ROLE: "${ENV}"
+
+      # authorization
+      AUTHORIZATION_AUDIENCE_VALID: "${AUTHORIZATION_AUDIENCE_VALID}"
+      AUTHORIZATION_ISSUER_VALID: "${AUTHORIZATION_ISSUER_VALID}"
+      AUTHORIZATION_ROLE_CLAIM_KEY: "${AUTHORIZATION_ROLE_CLAIM_KEY}"
+      AUTHORIZATION_SECRET_BASE64: "${AUTHORIZATION_SECRET_BASE64}"
+      AUTHORIZATION_SECRET_KEY: "${AUTHORIZATION_SECRET_KEY}"
+      AUTHORIZATION_TOKEN_EXPIRATION: "${AUTHORIZATION_TOKEN_EXPIRATION}"
+      AUTHORIZATION_TOKEN_REFRES_EXPIRATION: "${AUTHORIZATION_TOKEN_REFRES_EXPIRATION}"
+
   # data service ui application
   data-service-ui:
     container_name: "${DATABASE_SERVICE_UI_NAME}"
     image: dpage/pgadmin4
     ports:
       - "${DATABASE_SERVICE_UI_HOST_PORT}:${DATABASE_SERVICE_UI_APP_PORT}"
-    volumes:
+    # volumes:
       # This ensures that the connection information is preloaded into the pgAdmin instance in the container.
-      - "../.module/postgresql/data/service-ui/servers.json:/pgadmin4/servers.json"
+      # this volume not loaded in submodule?
+      # - "../.module/postgresql/data/service-ui/servers.json:/pgadmin4/servers.json"
     environment:
       # product
       ENV: "${ENV}"
