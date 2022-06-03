@@ -104,7 +104,7 @@ services:
     image: dpage/pgadmin4
     ports:
       - "${DATABASE_SERVICE_UI_HOST_PORT}:${DATABASE_SERVICE_UI_APP_PORT}"
-    # volumes:
+      # volumes:
       # This ensures that the connection information is preloaded into the pgAdmin instance in the container.
       # this volume not loaded in submodule?
       # - "../.module/postgresql/data/service-ui/servers.json:/pgadmin4/servers.json"
@@ -115,6 +115,30 @@ services:
       # data service ui
       PGADMIN_DEFAULT_EMAIL: "${AUTHORIZED_EMAIL}"
       PGADMIN_DEFAULT_PASSWORD: "${AUTHORIZED_PASSWORD}"
+    links:
+      - "data-service:data-service"
+    depends_on:
+      - "data-service"
+
+  # web service rest full
+  web-service-rest:
+    container_name: "${WEB_SERVICE_REST_NAME}"
+    image: postgrest/postgrest:${WEB_SERVICE_REST_VERSION}
+    ports:
+      - "${WEB_SERVICE_REST_HOST_PORT}:${WEB_SERVICE_REST_APP_PORT}"
+    environment:
+      # product
+      ENV: "${ENV}"
+
+      # rest service database connection
+      PGRST_DB_URI: ${WEB_SERVICE_REST_DB_URI}
+      PGRST_DB_SCHEMA: ${WEB_SERVICE_REST_API_SHEMA}
+      PGRST_DB_ANON_ROLE: ${DATABASE_SERVICE_ANONYMOUS_ROLE}
+      # rest service role and authorization
+      PGRST_ROLE_CLAIM_KEY: "${AUTHORIZATION_ROLE_CLAIM_KEY}"
+      PGRST_JWT_AUD: "3${AUTHORIZATION_AUDIENCE_VALID}"
+      PGRST_JWT_SECRET: "${AUTHORIZATION_SECRET_KEY}"
+
     links:
       - "data-service:data-service"
     depends_on:
