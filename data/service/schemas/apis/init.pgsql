@@ -6,8 +6,11 @@ SET
     search_path TO apis;
 
 -- include relative
+\ir permission.pgsql;
 
-\ir users.pgsql;
+\ir types/init.pgsql;
+
+\ir functions/init.pgsql;
 
 \ir tables/init.pgsql;
 
