@@ -1,0 +1,5 @@
+-- schemas permission
+-- grant usage permission
+
+GRANT USAGE ON SCHEMA auth TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
+GRANT USAGE ON SCHEMA auth TO :DATABASE_SERVICE_USER_ROLE; 
