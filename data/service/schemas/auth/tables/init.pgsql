@@ -1,0 +1,3 @@
+-- include relative tables
+-- 
+-- The tables to be created were added according to the application development order.

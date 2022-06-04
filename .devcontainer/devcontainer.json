@@ -23,7 +23,8 @@
 		"mhutchie.git-graph",
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
-		"hediet.vscode-drawio"
+		"hediet.vscode-drawio",
+		"rangav.vscode-thunder-client"
 	],
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// This can be used to network with other containers or with the host.
