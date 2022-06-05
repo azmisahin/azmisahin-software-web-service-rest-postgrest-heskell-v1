@@ -1,7 +1,7 @@
 # Introduction 
 Restfull API with OpenApi support, using authentication mechanisms such as JWT, fast integration with devops environments, using powerful postgresql database features.
 
-🔖: releasing / 0.1.8
+🔖: releasing / 0.1.9
 
 ## Architecture
 ![Architecture](docs/architecture/architecture-diagram.png)
