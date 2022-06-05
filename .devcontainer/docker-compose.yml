@@ -124,7 +124,7 @@ services:
 
   # web service rest full
   web-service-rest-accounts:
-    container_name: "${WEB_SERVICE_REST_NAME}-configurations"
+    container_name: "${WEB_SERVICE_REST_NAME}-accounts"
     image: postgrest/postgrest:${WEB_SERVICE_REST_VERSION}
     ports:
       - "10502:${WEB_SERVICE_REST_APP_PORT}"
