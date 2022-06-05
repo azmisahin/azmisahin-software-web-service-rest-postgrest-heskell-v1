@@ -3,6 +3,9 @@ Restfull API with OpenApi support, using authentication mechanisms such as JWT, 
 
 🔖: releasing / 0.1.7
 
+## Architecture
+![Architecture](docs/architecture/architecture-diagram.png)
+
 # Getting Started
 TO DO: Things to do when getting started on this project.
 - [Documentation](docs/README.md).
