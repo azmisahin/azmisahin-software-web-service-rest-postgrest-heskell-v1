@@ -123,18 +123,45 @@ services:
       - "data-service"
 
   # web service rest full
-  web-service-rest:
-    container_name: "${WEB_SERVICE_REST_NAME}"
+  web-service-rest-accounts:
+    container_name: "${WEB_SERVICE_REST_NAME}-configurations"
     image: postgrest/postgrest:${WEB_SERVICE_REST_VERSION}
     ports:
-      - "${WEB_SERVICE_REST_HOST_PORT}:${WEB_SERVICE_REST_APP_PORT}"
+      - "10502:${WEB_SERVICE_REST_APP_PORT}"
     environment:
       # product
       ENV: "${ENV}"
 
       # rest service database connection
       PGRST_DB_URI: ${WEB_SERVICE_REST_DB_URI}
-      PGRST_DB_SCHEMA: ${WEB_SERVICE_REST_API_SHEMA}
+      PGRST_DB_SCHEMA: "accounts"
+      PGRST_DB_ANON_ROLE: ${DATABASE_SERVICE_ANONYMOUS_ROLE}
+      # rest service role and authorization
+      PGRST_ROLE_CLAIM_KEY: "${AUTHORIZATION_ROLE_CLAIM_KEY}"
+      PGRST_JWT_AUD: "3${AUTHORIZATION_AUDIENCE_VALID}"
+      PGRST_JWT_SECRET: "${AUTHORIZATION_SECRET_KEY}"
+      PGRST_DB_PRE_REQUEST: "auth.check"
+      # api specification
+      PGRST_OPENAPI_SERVER_PROXY_URI: ${WEB_SERVICE_REST_OPENAPI_SERVER_PROXY_URI}
+
+    links:
+      - "data-service:data-service"
+    depends_on:
+      - "data-service"
+
+  # web service rest full
+  web-service-rest-configurations:
+    container_name: "${WEB_SERVICE_REST_NAME}-configuration"
+    image: postgrest/postgrest:${WEB_SERVICE_REST_VERSION}
+    ports:
+      - "11502:${WEB_SERVICE_REST_APP_PORT}"
+    environment:
+      # product
+      ENV: "${ENV}"
+
+      # rest service database connection
+      PGRST_DB_URI: ${WEB_SERVICE_REST_DB_URI}
+      PGRST_DB_SCHEMA: "configurations"
       PGRST_DB_ANON_ROLE: ${DATABASE_SERVICE_ANONYMOUS_ROLE}
       # rest service role and authorization
       PGRST_ROLE_CLAIM_KEY: "${AUTHORIZATION_ROLE_CLAIM_KEY}"
@@ -150,12 +177,23 @@ services:
       - "data-service"
 
   # web service rest ui
-  web-service-rest-ui:
-    container_name: "${WEB_SERVICE_REST_UI_NAME}"
+  web-service-rest-ui-accounts:
+    container_name: "${WEB_SERVICE_REST_UI_NAME}-accounts"
     image: swaggerapi/swagger-ui
     ports:
-      - "${WEB_SERVICE_REST_UI_HOST_PORT}:${WEB_SERVICE_REST_UI_APP_PORT}"
+      - "10404:${WEB_SERVICE_REST_UI_APP_PORT}"
     expose:
       - "8080"
     environment:
-      API_URL: http://localhost:${WEB_SERVICE_REST_HOST_PORT}/
+      API_URL: http://localhost:10502/
+
+  # web service rest ui
+  web-service-rest-ui-configurations:
+    container_name: "${WEB_SERVICE_REST_UI_NAME}-configurations"
+    image: swaggerapi/swagger-ui
+    ports:
+      - "11404:${WEB_SERVICE_REST_UI_APP_PORT}"
+    expose:
+      - "8080"
+    environment:
+      API_URL: http://localhost:11502/
