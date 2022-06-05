@@ -4,7 +4,7 @@
  * @brief The development container allows you to use a container as a full-featured development environment.
  * It can be used to allocate tools, libraries, or runtimes needed to run an application, work with a codebase, and assist with continuous integration and testing.
  * Development containers can be run locally or remotely in a private or public cloud.
- * @version 0.1.8
+ * @version 0.1.9
  * @date 2022-01-01
  *
  * @copyright Copyright (c) 2022
@@ -30,7 +30,7 @@
 	// This can be used to network with other containers or with the host.
 	// "forwardPorts": [3000, 5432],
 	// submodules before the container is created.
-	"initializeCommand": "git submodule update",
+	"initializeCommand": "git submodule update --init",
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "docker --version",
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
