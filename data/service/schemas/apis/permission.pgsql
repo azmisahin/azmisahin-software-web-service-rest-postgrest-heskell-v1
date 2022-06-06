@@ -1,11 +1,11 @@
 -- schemas permission
 -- grant usage permission
 
--- { "role" : "anonymous" }
-\ir permission.anonymous.pgsql
+-- {   "role": "authenticator" }
+\ir permission.authenticator.pgsql
 
 -- {   "role": "customer" }
-\ir permission.customer.pgsql
+\ir permission.user.pgsql
 
--- {   "role": "manager" }
-\ir permission.manager.pgsql
+-- { "role" : "anonymous" }
+\ir permission.anonymous.pgsql

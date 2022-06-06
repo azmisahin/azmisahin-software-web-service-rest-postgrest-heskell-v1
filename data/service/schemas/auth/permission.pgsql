@@ -1,5 +1,11 @@
 -- schemas permission
 -- grant usage permission
 
-GRANT USAGE ON SCHEMA auth TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
-GRANT USAGE ON SCHEMA auth TO :DATABASE_SERVICE_USER_ROLE; 
+-- {   "role": "authenticator" }
+\ir permission.authenticator.pgsql
+
+-- {   "role": "user" }
+\ir permission.user.pgsql
+
+-- { "role" : "anonymous" }
+\ir permission.anonymous.pgsql
