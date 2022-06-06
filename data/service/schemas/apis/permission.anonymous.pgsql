@@ -13,12 +13,14 @@ GRANT SELECT ON "configurations"."dictionaries" TO :DATABASE_SERVICE_ANONYMOUS_R
 -- GRANT USAGE ON SCHEMA "accounts" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
 
 -- those who have access to the API but will not be able to access read/write/delete.
--- GRANT SELECT ON "accounts"."users" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
--- GRANT SELECT ON "accounts"."authentications" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
--- GRANT SELECT ON "accounts"."emails" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
--- GRANT SELECT ON "accounts"."phones" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
--- GRANT SELECT ON "accounts"."persons" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
--- GRANT SELECT ON "accounts"."passwords" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
--- GRANT SELECT ON "accounts"."roles" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
--- GRANT SELECT ON "accounts"."user_roles" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
--- GRANT SELECT ON "accounts"."tokens" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
+-- Viewing these services may create security vulnerabilities.
+-- Examine known OWSAP security documents.
+GRANT SELECT ON "accounts"."users" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
+GRANT SELECT ON "accounts"."authentications" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
+GRANT SELECT ON "accounts"."emails" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
+GRANT SELECT ON "accounts"."phones" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
+GRANT SELECT ON "accounts"."persons" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
+GRANT SELECT ON "accounts"."passwords" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
+GRANT SELECT ON "accounts"."roles" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
+GRANT SELECT ON "accounts"."user_roles" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
+GRANT SELECT ON "accounts"."tokens" TO :DATABASE_SERVICE_ANONYMOUS_ROLE;
